@@ -38,6 +38,14 @@ chmod +x start.sh
 pip3 install -r requirements.txt
 ```
 
+**Run with Docker (optional):**
+```bash
+docker build -t amazon-scraper-api .
+docker run -p 5000:5000 --env-file .env amazon-scraper-api
+# or
+docker-compose up --build
+```
+
 ---
 
 ### Step 3: Configure

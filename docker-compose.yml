@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  amazon-scraper:
+    build: .
+    container_name: amazon-scraper-api
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      # Fallbacks if not provided in .env
+      API_HOST: 0.0.0.0
+      API_PORT: 5000
+      DEBUG_MODE: "False"
+    restart: unless-stopped
+    networks:
+      - scraper-net
+
+networks:
+  scraper-net:
+    driver: bridge

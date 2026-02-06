@@ -129,6 +129,25 @@ Server will start at: http://127.0.0.1:5000
 
 ✅ **Installation complete!** You can now use the API.
 
+### Method 3: Docker (Recommended for server/deployment)
+
+**Build and run:**
+```bash
+docker build -t amazon-scraper-api .
+docker run -p 5000:5000 --env-file .env amazon-scraper-api
+```
+
+**Or with docker-compose:**
+```bash
+docker-compose up --build
+```
+
+Configure your domain in `.env`:
+```dotenv
+API_DOMAIN=https://api.yourdomain.com
+ALLOWED_ORIGINS=https://yourdomain.com,https://app.yourdomain.com
+```
+
 ## 📡 API Usage
 
 **Base URL:**
@@ -144,6 +163,15 @@ curl http://127.0.0.1:5000/health
 
 # Production
 curl https://your-domain.com/health
+```
+
+### Readiness (for load balancers/containers)
+```bash
+# Local
+curl http://127.0.0.1:5000/api/ready
+
+# Production
+curl https://your-domain.com/api/ready
 ```
 
 Response:

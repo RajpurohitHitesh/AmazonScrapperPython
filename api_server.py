@@ -8,6 +8,7 @@ from flask_cors import CORS
 from functools import wraps
 import logging
 import sys
+from datetime import datetime
 
 # Setup logging
 logging.basicConfig(
@@ -23,8 +24,18 @@ if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
 # Import configurations
-from api_config import API_HOST, API_PORT, DEBUG_MODE, API_KEY, ALLOWED_ORIGINS, AMAZON_COUNTRIES, get_country_from_url
+from api_config import (
+    API_HOST,
+    API_PORT,
+    DEBUG_MODE,
+    API_KEY,
+    ALLOWED_ORIGINS,
+    AMAZON_COUNTRIES,
+    get_country_from_url,
+)
 from scrapers.india_scraper import IndiaScraper
+from scrapers.usa_scraper import USAScraper
+from scrapers.uk_scraper import UKScraper
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -78,6 +89,18 @@ def health_check():
     return jsonify({
         'status': 'healthy',
         'service': 'AmazonScraper API',
+        'timestamp': datetime.now().isoformat()
+    })
+
+
+@app.route('/api/ready', methods=['GET'])
+def ready_check():
+    """Readiness probe for deployment/containers"""
+    return jsonify({
+        'ready': True,
+        'service': 'AmazonScraper API',
+        'supported_countries': len(AMAZON_COUNTRIES),
+        'auth': 'api-key',
         'timestamp': datetime.now().isoformat()
     })
 
@@ -183,8 +206,8 @@ def get_scraper_for_country(country_code, country_config):
     """Get the appropriate scraper instance for a country"""
     scrapers = {
         'IN': IndiaScraper,
-        # 'US': USAScraper,
-        # 'UK': UKScraper,
+        'US': USAScraper,
+        'UK': UKScraper,
         # Add more as they are implemented
     }
     
