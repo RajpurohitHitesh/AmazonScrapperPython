@@ -84,7 +84,9 @@ python api_server.py
 ============================================================
 ```
 
-✅ **Server is running!** http://127.0.0.1:5000
+✅ **Server is running!**
+- **Local:** http://127.0.0.1:5000
+- **Production:** https://your-domain.com (if configured)
 
 ---
 
@@ -92,20 +94,32 @@ python api_server.py
 
 **Option 1: Browser**
 ```
+# Local
 http://127.0.0.1:5000/health
+
+# Production
+https://your-domain.com/health
 ```
 
 **Option 2: cURL**
 ```bash
+# Local
 curl http://127.0.0.1:5000/health
+
+# Production
+curl https://your-domain.com/health
 ```
 
 **Option 3: Python**
 ```python
 import requests
 
+# Change base_url based on your setup
+base_url = "http://127.0.0.1:5000"  # Local
+# base_url = "https://your-domain.com"  # Production
+
 # Scrape a product
-url = "http://127.0.0.1:5000/api/scrape"
+url = f"{base_url}/api/scrape"
 headers = {"X-API-Key": "your_api_key_here"}
 data = {"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}
 
@@ -131,7 +145,11 @@ Ctrl + C
 
 ### Check Status
 ```bash
+# Local
 curl http://127.0.0.1:5000/health
+
+# Production
+curl https://your-domain.com/health
 ```
 
 ### View Logs
@@ -145,13 +163,18 @@ type api.log          # Windows
 
 ## 🔥 Usage Examples
 
+**Note:** Replace URL based on your setup:
+- **Local:** `http://127.0.0.1:5000`
+- **Production:** `https://your-domain.com`
+
 ### 1. Health Check
 ```bash
-curl http://127.0.0.1:5000/health
+curl http://127.0.0.1:5000/health  # Local
 ```
 
 ### 2. Scrape Indian Product
 ```bash
+# Local
 curl -X POST http://127.0.0.1:5000/api/scrape \
   -H "X-API-Key: your_key" \
   -H "Content-Type: application/json" \
@@ -160,6 +183,7 @@ curl -X POST http://127.0.0.1:5000/api/scrape \
 
 ### 3. Scrape US Product
 ```bash
+# Local
 curl -X POST http://127.0.0.1:5000/api/scrape \
   -H "X-API-Key: your_key" \
   -H "Content-Type: application/json" \
@@ -168,7 +192,7 @@ curl -X POST http://127.0.0.1:5000/api/scrape \
 
 ### 4. Get Supported Countries
 ```bash
-curl http://127.0.0.1:5000/api/countries
+curl http://127.0.0.1:5000/api/countries  # Local
 ```
 
 ---

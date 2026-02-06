@@ -11,7 +11,15 @@ load_dotenv()
 # API Configuration
 API_HOST = os.getenv('API_HOST', '0.0.0.0')  # Listen on all interfaces
 API_PORT = int(os.getenv('API_PORT', '5000'))
+API_DOMAIN = os.getenv('API_DOMAIN', '')  # Optional: Your domain (e.g., https://api.yourdomain.com)
 DEBUG_MODE = os.getenv('DEBUG_MODE', 'False').lower() == 'true'
+
+# Get base URL for API
+def get_base_url():
+    """Get the base URL for the API (domain or localhost)"""
+    if API_DOMAIN:
+        return API_DOMAIN.rstrip('/')
+    return f'http://127.0.0.1:{API_PORT}'
 
 # Security
 API_KEY = os.getenv('API_KEY', 'your-secret-api-key-here')  # Change this in .env file

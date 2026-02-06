@@ -131,11 +131,19 @@ Server will start at: http://127.0.0.1:5000
 
 ## 📡 API Usage
 
+**Base URL:**
+- **Local Development:** `http://127.0.0.1:5000`
+- **Production:** `https://your-domain.com` (configure in `.env`)
+
 ### Health Check
 Check if API is running:
 
 ```bash
+# Local
 curl http://127.0.0.1:5000/health
+
+# Production
+curl https://your-domain.com/health
 ```
 
 Response:
@@ -165,7 +173,14 @@ Content-Type: application/json
 
 **Example with cURL:**
 ```bash
+# Local
 curl -X POST http://127.0.0.1:5000/api/scrape \
+  -H "X-API-Key: your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
+
+# Production
+curl -X POST https://your-domain.com/api/scrape \
   -H "X-API-Key: your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
@@ -175,7 +190,11 @@ curl -X POST http://127.0.0.1:5000/api/scrape \
 ```python
 import requests
 
-url = "http://127.0.0.1:5000/api/scrape"
+# Change base_url based on your setup
+base_url = "http://127.0.0.1:5000"  # Local
+# base_url = "https://your-domain.com"  # Production
+
+url = f"{base_url}/api/scrape"
 headers = {
     "X-API-Key": "your_api_key_here",
     "Content-Type": "application/json"
@@ -356,7 +375,7 @@ if ($result['success']) {
 ### Configuration (config/services.php)
 ```php
 'amazon_scraper' => [
-    'url' => env('AMAZON_SCRAPER_URL', 'http://127.0.0.1:5000'),
+    'url' => env('AMAZON_SCRAPER_URL', 'http://127.0.0.1:5000'),  // Local or production URL
     'api_key' => env('AMAZON_SCRAPER_API_KEY'),
     'timeout' => env('AMAZON_SCRAPER_TIMEOUT', 60),
 ],
@@ -364,8 +383,13 @@ if ($result['success']) {
 
 ### Environment (.env)
 ```bash
+# Local Development
 AMAZON_SCRAPER_URL=http://127.0.0.1:5000
-AMAZON_SCRAPER_API_KEY=1AqqRHyRhnlWzvljsvjD011dROrTeS3jqVxmqZHUFDqnbe1zLZ5bqxE5wVMVXgwF
+
+# Production
+# AMAZON_SCRAPER_URL=https://your-domain.com
+
+AMAZON_SCRAPER_API_KEY=your_api_key_here
 AMAZON_SCRAPER_TIMEOUT=60
 ```
 
