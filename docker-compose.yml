@@ -3,6 +3,7 @@ services:
   amazon-scraper:
     build: .
     container_name: amazon-scraper-api
+    shm_size: "1gb"
     ports:
       - "5000:5000"
     env_file:

@@ -14,21 +14,26 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
-echo "[1/4] Checking Python installation..."
+echo "[1/5] Checking Python installation..."
 python3 --version
 echo ""
 
 # Install dependencies
-echo "[2/4] Installing dependencies..."
+echo "[2/5] Installing dependencies..."
 pip3 install -r requirements.txt
 if [ $? -ne 0 ]; then
     echo "ERROR: Failed to install dependencies"
     exit 1
 fi
+python3 -m playwright install chromium
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install Playwright browsers"
+    exit 1
+fi
 echo ""
 
 # Setup environment file
-echo "[3/4] Setting up environment..."
+echo "[3/5] Setting up environment..."
 if [ ! -f .env ]; then
     if [ -f .env.example ]; then
         cp .env.example .env
@@ -44,7 +49,7 @@ fi
 echo ""
 
 # Start server
-echo "[4/4] Starting server..."
+echo "[5/5] Starting server..."
 echo ""
 echo "========================================"
 echo "Server is starting..."

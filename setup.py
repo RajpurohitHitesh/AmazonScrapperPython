@@ -41,7 +41,7 @@ setup(
         ],
     },
     include_package_data=True,
-    keywords="amazon scraper api flask selenium web-scraping ecommerce",
+    keywords="amazon scraper api flask playwright web-scraping ecommerce",
     project_urls={
         "Bug Reports": "https://github.com/RajpurohitHitesh/AmazonScrapperPython/issues",
         "Source": "https://github.com/RajpurohitHitesh/AmazonScrapperPython",

@@ -45,8 +45,13 @@ To suggest new features:
 
 4. **Test your changes**
    ```bash
+   python -m playwright install chromium
    python api_server.py
-   # Test the API
+   # Test the API manually
+   pytest
+   # Lint/format (optional)
+   ruff check .
+   black .
    ```
 
 5. **Commit your changes**
@@ -78,28 +83,20 @@ To suggest new features:
 
 To add a new country scraper:
 
-1. **Create scraper file:**
-   ```python
-   # scrapers/your_country_scraper.py
-   from scrapers.base_scraper import BaseAmazonScraper
-   
-   class YourCountryScraper(BaseAmazonScraper):
-       def scrape_product(self, url):
-           # Implementation
-           pass
-   ```
-
-2. **Update api_config.py:**
+1. **Update api_config.py:**
    ```python
    AMAZON_COUNTRIES = {
        'XX': {
            'name': 'Your Country',
            'domain': 'amazon.xx',
            'currency': 'XXX',
-           'scraper': 'your_country_scraper.YourCountryScraper'
+           'currency_code': 'XXX'
        }
    }
    ```
+
+2. **Optional custom scraper:**
+   Add a country-specific scraper only if the default extraction needs tweaks.
 
 3. **Test thoroughly:**
    - Test with multiple products

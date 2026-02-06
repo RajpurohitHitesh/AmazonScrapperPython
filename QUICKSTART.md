@@ -26,6 +26,7 @@ start.bat
 
 # or in Command Prompt:
 pip install -r requirements.txt
+python -m playwright install chromium
 ```
 
 **On Linux/Mac:**
@@ -36,6 +37,7 @@ chmod +x start.sh
 
 # or manually:
 pip3 install -r requirements.txt
+python3 -m playwright install chromium
 ```
 
 **Run with Docker (optional):**
@@ -81,20 +83,13 @@ python api_server.py
 ```
 
 **You'll see:**
-```
-============================================================
-🚀 AmazonScraper API Server
-============================================================
-📅 Started: 2026-02-06 10:30:45
-🌐 Host: 0.0.0.0:5000
-🔐 API Key Authentication: Enabled
-🌍 Supported Countries: 15
-============================================================
-```
+JSON logs in console and api.log
 
 ✅ **Server is running!**
 - **Local:** http://127.0.0.1:5000
 - **Production:** https://your-domain.com (if configured)
+- **Docs:** http://127.0.0.1:5000/docs
+- **Metrics:** http://127.0.0.1:5000/metrics
 
 ---
 
@@ -103,19 +98,19 @@ python api_server.py
 **Option 1: Browser**
 ```
 # Local
-http://127.0.0.1:5000/health
+http://127.0.0.1:5000/api/health
 
 # Production
-https://your-domain.com/health
+https://your-domain.com/api/health
 ```
 
 **Option 2: cURL**
 ```bash
 # Local
-curl http://127.0.0.1:5000/health
+curl http://127.0.0.1:5000/api/health
 
 # Production
-curl https://your-domain.com/health
+curl https://your-domain.com/api/health
 ```
 
 **Option 3: Python**
@@ -129,7 +124,7 @@ base_url = "http://127.0.0.1:5000"  # Local
 # Scrape a product
 url = f"{base_url}/api/scrape"
 headers = {"X-API-Key": "your_api_key_here"}
-data = {"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}
+data = {"url": "https://www.amazon.in/dp/B0FMDNZ61S"}
 
 response = requests.post(url, json=data, headers=headers)
 print(response.json())
@@ -154,10 +149,10 @@ Ctrl + C
 ### Check Status
 ```bash
 # Local
-curl http://127.0.0.1:5000/health
+curl http://127.0.0.1:5000/api/health
 
 # Production
-curl https://your-domain.com/health
+curl https://your-domain.com/api/health
 ```
 
 ### View Logs
@@ -177,7 +172,7 @@ type api.log          # Windows
 
 ### 1. Health Check
 ```bash
-curl http://127.0.0.1:5000/health  # Local
+curl http://127.0.0.1:5000/api/health  # Local
 ```
 
 ### 2. Scrape Indian Product
@@ -186,7 +181,7 @@ curl http://127.0.0.1:5000/health  # Local
 curl -X POST http://127.0.0.1:5000/api/scrape \
   -H "X-API-Key: your_key" \
   -H "Content-Type: application/json" \
-  -d '{"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
+  -d '{"url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
 ```
 
 ### 3. Scrape US Product
@@ -195,7 +190,7 @@ curl -X POST http://127.0.0.1:5000/api/scrape \
 curl -X POST http://127.0.0.1:5000/api/scrape \
   -H "X-API-Key: your_key" \
   -H "Content-Type: application/json" \
-  -d '{"product_url": "https://www.amazon.com/dp/B08N5WRWNW"}'
+  -d '{"url": "https://www.amazon.com/dp/B08N5WRWNW"}'
 ```
 
 ### 4. Get Supported Countries
@@ -225,10 +220,10 @@ API_PORT=5001
 # and use the same key in requests
 ```
 
-### Browser/WebDriver Issues
+### Playwright Browser Issues
 ```bash
-# Check internet connection
-# WebDriver will auto-download on first run
+# Reinstall browser binaries
+python -m playwright install chromium
 ```
 
 ---

@@ -5,7 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)
 ![Flask](https://img.shields.io/badge/Flask-3.0-green.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Selenium](https://img.shields.io/badge/Selenium-4.15-red.svg)
+![Playwright](https://img.shields.io/badge/Playwright-1.41-purple.svg)
 
 **A powerful REST API service for scraping product data from 15+ Amazon marketplaces worldwide**
 
@@ -17,7 +17,7 @@
 
 ## 🎯 Overview
 
-REST API service for scraping Amazon product data across 15 countries. Built with Flask, Selenium, and BeautifulSoup for reliable data extraction. 
+REST API service for scraping Amazon product data across 15 countries. Built with Flask, Playwright, and BeautifulSoup for reliable data extraction. 
 
 **Perfect for:**
 - E-commerce price monitoring
@@ -31,7 +31,11 @@ REST API service for scraping Amazon product data across 15 countries. Built wit
 - ✅ **Auto Country Detection** - Automatically detects country from URL
 - ✅ **12 Essential Fields** - Clean, structured product data
 - ✅ **API Authentication** - Secure API key-based access
-- ✅ **Anti-Detection** - Built-in browser fingerprinting prevention
+- ✅ **Anti-Detection** - Playwright with stealth scripts + device profiles
+- ✅ **Rate Limiting** - Per API key/IP throttling
+- ✅ **Metrics** - Prometheus-ready /metrics endpoint
+- ✅ **Swagger UI** - Interactive API docs at /docs
+- ✅ **Caching** - Short TTL cache by ASIN + country
 - ✅ **Easy Deployment** - One-command setup for VPS
 - ✅ **CORS Support** - Ready for web applications
 - ✅ **Production Ready** - Systemd service, logging, error handling
@@ -85,8 +89,7 @@ Script automatically:
 
 ### Prerequisites
 - Python 3.7 or higher
-- Microsoft Edge browser
-- Internet connection
+- Internet connection (for Playwright browser downloads)
 
 ### Quick Setup
 
@@ -99,6 +102,7 @@ cd AmazonScrapperPython
 **2. Install dependencies:**
 ```bash
 pip install -r requirements.txt
+python -m playwright install chromium
 ```
 
 **3. Configure environment:**
@@ -159,10 +163,10 @@ Check if API is running:
 
 ```bash
 # Local
-curl http://127.0.0.1:5000/health
+curl http://127.0.0.1:5000/api/health
 
 # Production
-curl https://your-domain.com/health
+curl https://your-domain.com/api/health
 ```
 
 ### Readiness (for load balancers/containers)
@@ -174,13 +178,17 @@ curl http://127.0.0.1:5000/api/ready
 curl https://your-domain.com/api/ready
 ```
 
-Response:
-```json
-{
-  "status": "healthy",
-  "supported_countries": 15
-}
-```
+### Swagger UI
+Open interactive docs at:
+- Local: http://127.0.0.1:5000/docs
+- Production: https://your-domain.com/docs
+
+### Metrics
+Prometheus endpoint:
+- Local: http://127.0.0.1:5000/metrics
+- Production: https://your-domain.com/metrics
+
+Response includes queue depth and cache size.
 
 ### Scrape Product
 
@@ -195,7 +203,9 @@ Content-Type: application/json
 **Request Body:**
 ```json
 {
-  "product_url": "https://www.amazon.in/dp/B0FMDNZ61S"
+  "url": "https://www.amazon.in/dp/B0FMDNZ61S",
+  "headless": true,
+  "proxy": "http://user:pass@host:port"
 }
 ```
 
@@ -205,13 +215,13 @@ Content-Type: application/json
 curl -X POST http://127.0.0.1:5000/api/scrape \
   -H "X-API-Key: your_api_key_here" \
   -H "Content-Type: application/json" \
-  -d '{"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
+  -d '{"url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
 
 # Production
 curl -X POST https://your-domain.com/api/scrape \
   -H "X-API-Key: your_api_key_here" \
   -H "Content-Type: application/json" \
-  -d '{"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
+  -d '{"url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
 ```
 
 **Example with Python:**
@@ -228,7 +238,7 @@ headers = {
     "Content-Type": "application/json"
 }
 data = {
-    "product_url": "https://www.amazon.in/dp/B0FMDNZ61S"
+    "url": "https://www.amazon.in/dp/B0FMDNZ61S"
 }
 
 response = requests.post(url, json=data, headers=headers)
@@ -239,6 +249,10 @@ print(response.json())
 ```json
 {
   "success": true,
+  "cached": false,
+  "country": "India",
+  "country_code": "IN",
+  "detected_country": "IN",
   "data": {
     "asin": "B0FMDNZ61S",
     "merchant": "Amazon India",
@@ -248,13 +262,28 @@ print(response.json())
     "brand": "Samsung",
     "current_price": 1299.00,
     "original_price": 1999.00,
-    "stock_status": "In Stock",
+    "currency": "₹",
+    "currency_code": "INR",
+    "stock_status": "in_stock",
     "image_path": "https://m.media-amazon.com/images/I/...",
+    "images": ["https://m.media-amazon.com/images/I/..."],
     "rating": 4.2,
-    "review_count": 1850
-  },
-  "country": "India",
-  "scrape_time": "2.45s"
+    "review_count": 1850,
+    "bullet_points": ["..."],
+    "variations": ["Color", "Size"],
+    "delivery_eta": "Tomorrow",
+    "seller": {
+      "name": "Amazon",
+      "fulfilled_by_amazon": true
+    },
+    "offers_count": 5,
+    "buy_box_winner": "Amazon",
+    "seller_type": "amazon",
+    "description": "...",
+    "specifications": {
+      "Brand": "Samsung"
+    }
+  }
 }
 ```
 
@@ -266,13 +295,10 @@ print(response.json())
   "message": "Please provide a valid Amazon product URL"
 }
 ```
-  "message": "Please provide a valid Amazon product URL"
-}
-```
 
 ## 📦 Response Fields
 
-API returns 12 essential fields:
+API returns these fields (when available):
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -284,10 +310,22 @@ API returns 12 essential fields:
 | `brand` | string | Brand name |
 | `current_price` | float | Current price (numeric) |
 | `original_price` | float | Original/MRP price (numeric) |
-| `stock_status` | string | "In Stock" or "Out of Stock" |
+| `currency` | string | Currency symbol |
+| `currency_code` | string | Currency code |
+| `stock_status` | string | `in_stock` or `out_of_stock` |
 | `image_path` | string | Main product image URL |
+| `images` | array | Additional image URLs |
 | `rating` | float | Average rating (0-5) |
 | `review_count` | int | Number of reviews |
+| `bullet_points` | array | Key feature bullets |
+| `variations` | array | Variation labels (e.g., size/color) |
+| `delivery_eta` | string | Delivery estimate (if shown) |
+| `seller` | object | Seller info (name, FBA) |
+| `offers_count` | int | Offers count (if shown) |
+| `buy_box_winner` | string | Buy box seller (if shown) |
+| `seller_type` | string | `amazon` or `marketplace` |
+| `description` | string | Description text |
+| `specifications` | object | Key-value specs |
 
 ## 🌍 Supported Countries (15 Amazon Marketplaces)
 
@@ -318,14 +356,33 @@ API returns 12 essential fields:
 API_HOST=0.0.0.0          # 0.0.0.0 for public, 127.0.0.1 for local
 API_PORT=5000             # Server port
 API_KEY=your_key_here     # Authentication key
+API_KEYS=key1,key2        # Optional rotated keys
+ENABLE_JWT=False          # Optional JWT auth
+JWT_SECRET=your_secret
 
 # Application
 DEBUG_MODE=True           # Enable debug logging
-HEADLESS_MODE=False       # Run browser without GUI
-BROWSER_TIMEOUT=30        # Browser timeout in seconds
+HEADLESS_MODE=True        # Run browser without GUI
+SCRAPE_TIMEOUT_SECONDS=30 # Scrape timeout
+SCRAPE_MAX_RETRIES=2      # Retry attempts
+MAX_CONCURRENCY=3         # Max concurrent scrapes
+PROXY_URLS=               # Optional proxy list (comma-separated)
 
 # CORS
 ALLOWED_ORIGINS=http://localhost:8000,https://yourdomain.com
+
+# Rate limiting
+RATE_LIMIT_PER_MINUTE_KEY=60
+RATE_LIMIT_PER_MINUTE_IP=120
+
+# Cache
+CACHE_TTL_SECONDS=300
+CACHE_MAX_ITEMS=1000
+
+# Readiness checks
+READY_CHECK_ASIN=
+READY_CHECK_COUNTRY=US
+READY_CHECK_INTERVAL_SECONDS=900
 ```
 
 ## 🔐 Authentication
@@ -342,30 +399,16 @@ X-API-Key: your_api_key_here
 ?api_key=your_api_key_here
 ```
 
-## 📦 Response Fields
-
-API returns 12 essential fields:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `asin` | string | Amazon Standard Identification Number |
-| `merchant` | string | Country-specific Amazon (e.g., Amazon India, Amazon USA) |
-| `name` | string | Product title |
-| `category` | string | Main category |
-| `subcategory` | string | Subcategory |
-| `brand` | string | Brand name |
-| `current_price` | float | Current price (numeric) |
-| `original_price` | float | Original/MRP price (numeric) |
-| `stock_status` | string | "In Stock" or "Out of Stock" |
-| `image_path` | string | Main product image URL |
-| `rating` | float | Average rating (0-5) |
-| `review_count` | int | Number of reviews |
+**Optional JWT:**
+```bash
+Authorization: Bearer <jwt>
+```
 
 ## 🏗️ Architecture
 
 ### Base Scraper Class
 All country scrapers inherit from `BaseAmazonScraper`:
-- Browser initialization with anti-detection
+- Playwright browser contexts with stealth scripts
 - ASIN extraction from URLs
 - Common scraping methods
 - Error handling
@@ -444,51 +487,36 @@ sudo systemctl start amazon-scraper-api
 
 ### Adding New Country Scraper
 
-1. Create new scraper file:
-```python
-# scrapers/germany_scraper.py
-from scrapers.base_scraper import BaseAmazonScraper
-
-class GermanyScraper(BaseAmazonScraper):
-    def scrape_product(self, url):
-        # Implement Germany-specific scraping
-        pass
-```
-
-2. Add to `api_config.py`:
+1. Add country in `api_config.py`:
 ```python
 AMAZON_COUNTRIES = {
     'DE': {
         'name': 'Germany',
         'domain': 'amazon.de',
         'currency': 'EUR',
-        'scraper': 'germany_scraper.GermanyScraper'
+    'currency_code': 'EUR'
     }
 }
 ```
 
-3. Import in `api_server.py`:
-```python
-from scrapers.germany_scraper import GermanyScraper
-```
+2. (Optional) Add a custom scraper if needed and register in `get_scraper_for_country`.
 
 ## 📊 Logging
 
 ### Development
-- Console output with DEBUG_MODE=True
-- Real-time scraping progress
+- JSON logs to console with DEBUG_MODE=True
+- Request IDs in logs
 
 ### Production
-- Output log: `/home/amazonscraper/app/logs/output.log`
-- Error log: `/home/amazonscraper/app/logs/error.log`
+- File log: `api.log`
 - Systemd journal: `sudo journalctl -u amazon-scraper-api`
 
 ## 🐛 Troubleshooting
 
-### WebDriver Issues
+### Playwright Browser Issues
 ```bash
-# Auto-download on first run
-# Requires internet connection
+# Reinstall browser binaries
+python -m playwright install chromium
 ```
 
 ### Port Already in Use
@@ -505,7 +533,8 @@ ALLOWED_ORIGINS=https://yourdomain.com,http://localhost:8000
 
 ### Service Not Starting (VPS)
 ```bash
-# Check statussudo systemctl status amazon-scraper-api
+# Check status
+sudo systemctl status amazon-scraper-api
 
 # View logs
 sudo journalctl -u amazon-scraper-api -f

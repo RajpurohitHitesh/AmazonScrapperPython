@@ -16,22 +16,28 @@ if errorlevel 1 (
     exit /b 1
 )
 
-echo [1/4] Checking Python installation...
+echo [1/5] Checking Python installation...
 python --version
 echo.
 
 REM Install dependencies
-echo [2/4] Installing dependencies...
+echo [2/5] Installing dependencies...
 pip install -r requirements.txt
 if errorlevel 1 (
     echo ERROR: Failed to install dependencies
     pause
     exit /b 1
 )
+python -m playwright install chromium
+if errorlevel 1 (
+    echo ERROR: Failed to install Playwright browsers
+    pause
+    exit /b 1
+)
 echo.
 
 REM Setup environment file
-echo [3/4] Setting up environment...
+echo [3/5] Setting up environment...
 if not exist .env (
     if exist .env.example (
         copy .env.example .env
@@ -47,7 +53,7 @@ if not exist .env (
 echo.
 
 REM Start server
-echo [4/4] Starting server...
+echo [5/5] Starting server...
 echo.
 echo ========================================
 echo Server is starting...
