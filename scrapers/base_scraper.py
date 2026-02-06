@@ -247,16 +247,28 @@ class BaseAmazonScraper:
             "#wayfinding-breadcrumbs_container li a",
             "#wayfinding-breadcrumbs_feature_div ul li a",
             "ul.a-unordered-list.a-horizontal.a-size-small li a",
-            "div[data-feature-name='breadcrumbs'] a"
+            "div[data-feature-name='breadcrumbs'] a",
+            "#wayfinding-breadcrumbs_container",
+            "#wayfinding-breadcrumbs_feature_div",
         ]
         
         for selector in breadcrumb_selectors:
             breadcrumbs = soup.select(selector)
             if breadcrumbs and len(breadcrumbs) > 0:
-                category = self._clean_text(breadcrumbs[0].get_text())
-                if category and category.lower() != "back to results":
-                    logging.info(f"📁 Category found: {category}")
-                    return category[:100]
+                # Try link-based extraction first
+                if breadcrumbs[0].name == 'a':
+                    category = self._clean_text(breadcrumbs[0].get_text())
+                    if category and category.lower() != "back to results":
+                        logging.info(f"📁 Category found: {category}")
+                        return category[:100]
+                else:
+                    # Try text-based extraction with separator
+                    text = self._clean_text(breadcrumbs[0].get_text())
+                    if '›' in text:
+                        parts = [p.strip() for p in text.split('›')]
+                        if parts and parts[0] and parts[0].lower() != "back to results":
+                            logging.info(f"📁 Category found: {parts[0]}")
+                            return parts[0][:100]
         
         logging.warning("⚠️ Category not found, using General")
         return "General"
@@ -268,15 +280,32 @@ class BaseAmazonScraper:
             "#wayfinding-breadcrumbs_container li a",
             "#wayfinding-breadcrumbs_feature_div ul li a",
             "ul.a-unordered-list.a-horizontal.a-size-small li a",
-            "div[data-feature-name='breadcrumbs'] a"
+            "div[data-feature-name='breadcrumbs'] a",
+            "#wayfinding-breadcrumbs_container",
+            "#wayfinding-breadcrumbs_feature_div",
         ]
         
         for selector in breadcrumb_selectors:
             breadcrumbs = soup.select(selector)
-            if len(breadcrumbs) > 1:
-                # Get all breadcrumb texts
-                crumbs = [self._clean_text(b.get_text()) for b in breadcrumbs]
-                crumbs = [c for c in crumbs if c and c.lower() != "back to results"]  # Remove empty and "Back to results"
+            if len(breadcrumbs) > 0:
+                # Check if it's a container with › separator
+                if breadcrumbs[0].name != 'a':
+                    text = self._clean_text(breadcrumbs[0].get_text())
+                    if '›' in text:
+                        parts = [p.strip() for p in text.split('›')]
+                        parts = [p for p in parts if p and p.lower() != "back to results"]
+                        if len(parts) > 0:
+                            # Last part is subcategory
+                            subcategory = parts[-1]
+                            logging.info(f"📂 Subcategory found: {subcategory}")
+                            return subcategory[:100]
+                    continue
+                
+                # Link-based extraction
+                if len(breadcrumbs) > 1:
+                    # Get all breadcrumb texts
+                    crumbs = [self._clean_text(b.get_text()) for b in breadcrumbs]
+                    crumbs = [c for c in crumbs if c and c.lower() != "back to results"]  # Remove empty and "Back to results"
                 
                 if len(crumbs) > 1:
                     # Get last breadcrumb
