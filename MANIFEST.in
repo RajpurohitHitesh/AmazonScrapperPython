@@ -1,0 +1,14 @@
+include README.md
+include LICENSE
+include CONTRIBUTING.md
+include INSTALL.txt
+include QUICKSTART.md
+include requirements.txt
+include .env.example
+include start.bat
+include start.sh
+
+recursive-include scrapers *.py
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .env

@@ -1,6 +1,6 @@
 """
 AmazonScraper Flask API
-Main API server to handle scraping requests from AmezPrice
+Main API server to handle scraping requests from clients.
 """
 
 from flask import Flask, request, jsonify
@@ -217,3 +217,15 @@ if __name__ == '__main__':
     print("=" * 60)
     
     app.run(host=API_HOST, port=API_PORT, debug=DEBUG_MODE)
+
+def main():
+    """Entry point for console script"""
+    if __name__ == '__main__':
+        pass
+    else:
+        # When called via console script
+        import sys
+        sys.exit(app.run(host=API_HOST, port=API_PORT, debug=DEBUG_MODE))
+
+if __name__ == '__main__':
+    main()

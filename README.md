@@ -1,63 +1,141 @@
 # Amazon Scraper API - Multi-Country Product Scraping
 
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-3.0-green.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Selenium](https://img.shields.io/badge/Selenium-4.15-red.svg)
+
+**एक powerful REST API service जो 15+ देशों के Amazon marketplaces से product data scrape करती है**
+
+[Features](#-features) • [Installation](#-installation) • [Quick Start](QUICKSTART.md) • [Usage](#-api-usage) • [Contributing](CONTRIBUTING.md)
+
+</div>
+
+---
+
 ## 🎯 Overview
 
-REST API service for scraping Amazon product data across 15 countries. Built with Flask, Selenium, and BeautifulSoup for reliable data extraction.
+REST API service for scraping Amazon product data across 15 countries. Built with Flask, Selenium, and BeautifulSoup for reliable data extraction. 
+
+**Perfect for:**
+- E-commerce price monitoring
+- Product research & analytics
+- Inventory management systems
+- Market research applications
+
+## ✨ Features
+
+- ✅ **15+ Amazon Marketplaces** - Support for US, UK, India, Japan, and more
+- ✅ **Auto Country Detection** - Automatically detects country from URL
+- ✅ **12 Essential Fields** - Clean, structured product data
+- ✅ **API Authentication** - Secure API key-based access
+- ✅ **Anti-Detection** - Built-in browser fingerprinting prevention
+- ✅ **Easy Deployment** - One-command setup for VPS
+- ✅ **CORS Support** - Ready for web applications
+- ✅ **Production Ready** - Systemd service, logging, error handling
 
 ## 📁 Project Structure
 
 ```
-AmazonScraper/
+AmazonScrapperPython/
 ├── api_server.py           # Flask API server
 ├── api_config.py           # Country configurations
-├── .env                    # Environment configuration
 ├── .env.example            # Example environment file
+├── .gitignore              # Git ignore rules
 ├── requirements.txt        # Python dependencies
-├── INSTALL.txt             # Complete installation & VPS deployment guide
+├── setup.py                # Package installation
+├── LICENSE                 # MIT License
+├── INSTALL.txt             # Detailed installation guide
+├── CONTRIBUTING.md         # Contribution guidelines
 ├── README.md               # This file
+├── start.bat               # Quick start (Windows)
+├── start.sh                # Quick start (Linux/Mac)
 └── scrapers/
+    ├── __init__.py
     ├── base_scraper.py     # Base scraper class
     ├── india_scraper.py    # Amazon India
     ├── usa_scraper.py      # Amazon USA
     └── uk_scraper.py       # Amazon UK
 ```
 
-## 🚀 Quick Start
+## 🚀 Installation
+
+### Method 1: Quick Start (Recommended)
+
+**Windows:**
+```bash
+start.bat
+```
+
+**Linux/Mac:**
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+Script automatically:
+- ✅ Checks Python installation
+- ✅ Installs dependencies
+- ✅ Creates .env file
+- ✅ Starts the server
+
+### Method 2: Manual Installation
 
 ### Prerequisites
-- Python 3.7+
+- Python 3.7 या higher
 - Microsoft Edge browser
 - Internet connection
 
-### Installation
+### Quick Setup
 
-1. **Install dependencies:**
+**1. Clone the repository:**
+```bash
+git clone https://github.com/yourusername/AmazonScrapperPython.git
+cd AmazonScrapperPython
+```
+
+**2. Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-2. **Configure environment:**
+**3. Configure environment:**
 ```bash
+# Windows
 copy .env.example .env
+
+# Linux/Mac
+cp .env.example .env
 ```
 
-Edit `.env` and set your API key:
-```
-API_KEY=your_secret_api_key_here
+**4. Edit `.env` और अपनी API key set करें:**
+```bash
+API_KEY=your_secure_api_key_here
 ```
 
-3. **Run the server:**
+**💡 Tip:** Secure API key generate करने के लिए:
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+**5. Run the server:**
 ```bash
 python api_server.py
 ```
 
-Server starts at: http://127.0.0.1:5000
+Server चालू हो जाएगा: http://127.0.0.1:5000
 
-## 📡 API Endpoints
+✅ **Installation complete!** अब आप API use कर सकते हैं।
+
+## 📡 API Usage
 
 ### Health Check
+Check if API is running:
+
 ```bash
-GET /health
+curl http://127.0.0.1:5000/health
 ```
 
 Response:
@@ -69,18 +147,48 @@ Response:
 ```
 
 ### Scrape Product
-```bash
-POST /api/scrape
-Headers: X-API-Key: your_api_key_here
-         Content-Type: application/json
 
-Body:
+**Endpoint:** `POST /api/scrape`
+
+**Headers:**
+```
+X-API-Key: your_api_key_here
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
 {
   "product_url": "https://www.amazon.in/dp/B0FMDNZ61S"
 }
 ```
 
-Response (12 essential fields):
+**Example with cURL:**
+```bash
+curl -X POST http://127.0.0.1:5000/api/scrape \
+  -H "X-API-Key: your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}'
+```
+
+**Example with Python:**
+```python
+import requests
+
+url = "http://127.0.0.1:5000/api/scrape"
+headers = {
+    "X-API-Key": "your_api_key_here",
+    "Content-Type": "application/json"
+}
+data = {
+    "product_url": "https://www.amazon.in/dp/B0FMDNZ61S"
+}
+
+response = requests.post(url, json=data, headers=headers)
+print(response.json())
+```
+
+**Success Response:**
 ```json
 {
   "success": true,
@@ -88,16 +196,52 @@ Response (12 essential fields):
     "asin": "B0FMDNZ61S",
     "merchant": "Amazon",
     "name": "Product Name",
-    "category": "Category",
-    "subcategory": "Subcategory",
-    "brand": "Brand Name",
+    "category": "Electronics",
+    "subcategory": "Smartphones",
+    "brand": "Samsung",
     "current_price": 1299.00,
     "original_price": 1999.00,
     "stock_status": "In Stock",
-    "image_path": "https://...",
+    "image_path": "https://m.media-amazon.com/images/I/...",
     "rating": 4.2,
     "review_count": 1850
-  }
+  },
+  "country": "India",
+  "scrape_time": "2.45s"
+}
+```
+
+**Error Response:**
+```json
+{
+  "success": false,
+  "error": "Invalid URL",
+  "message": "Please provide a valid Amazon product URL"
+}
+```
+  "message": "Please provide a valid Amazon product URL"
+}
+```
+
+## 📦 Response Fields
+
+API returns 12 essential fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `asin` | string | Amazon Standard Identification Number |
+| `merchant` | string | Seller name (Amazon, Cloudtail, etc.) |
+| `name` | string | Product title |
+| `category` | string | Main category |
+| `subcategory` | string | Subcategory |
+| `brand` | string | Brand name |
+| `current_price` | float | Current price (numeric) |
+| `original_price` | float | Original/MRP price (numeric) |
+| `stock_status` | string | "In Stock" or "Out of Stock" |
+| `image_path` | string | Main product image URL |
+| `rating` | float | Average rating (0-5) |
+| `review_count` | int | Number of reviews |
+
 ## 🌍 Supported Countries (15 Amazon Marketplaces)
 
 | Country | Domain | Currency |
@@ -151,6 +295,25 @@ X-API-Key: your_api_key_here
 ?api_key=your_api_key_here
 ```
 
+## 📦 Response Fields
+
+API returns 12 essential fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `asin` | string | Amazon Standard Identification Number |
+| `merchant` | string | Seller name (Amazon, Cloudtail, etc.) |
+| `name` | string | Product title |
+| `category` | string | Main category |
+| `subcategory` | string | Subcategory |
+| `brand` | string | Brand name |
+| `current_price` | float | Current price (numeric) |
+| `original_price` | float | Original/MRP price (numeric) |
+| `stock_status` | string | "In Stock" or "Out of Stock" |
+| `image_path` | string | Main product image URL |
+| `rating` | float | Average rating (0-5) |
+| `review_count` | int | Number of reviews |
+
 ## 🏗️ Architecture
 
 ### Base Scraper Class
@@ -175,26 +338,9 @@ amazon.com → USA Scraper
 amazon.co.uk → UK Scraper
 ```
 
-## 📦 Response Fields
+## 🔗 Integration Examples
 
-The API returns only 12 essential fields (no bloat):
-
-1. **asin** - Amazon Standard Identification Number
-2. **merchant** - Seller name (Amazon, Cloudtail, etc.)
-3. **name** - Product title
-4. **category** - Main category
-5. **subcategory** - Subcategory
-6. **brand** - Brand name
-7. **current_price** - Current price (numeric)
-8. **original_price** - Original/MRP price (numeric)
-9. **stock_status** - "In Stock" or "Out of Stock"
-10. **image_path** - Main product image URL
-11. **rating** - Average rating (0-5)
-12. **review_count** - Number of reviews
-
-## 🔗 Laravel Integration
-
-### Service Class
+### Laravel (PHP)
 ```php
 use App\Services\AmazonScraperService;
 
@@ -307,4 +453,50 @@ ALLOWED_ORIGINS=https://yourdomain.com,http://localhost:8000
 
 ### Service Not Starting (VPS)
 ```bash
-# Check status
+# Check statussudo systemctl status amazon-scraper-api
+
+# View logs
+sudo journalctl -u amazon-scraper-api -f
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! देखें [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+**Ways to contribute:**
+- 🐛 Report bugs
+- 💡 Suggest features
+- 🌍 Add new country scrapers
+- 📝 Improve documentation
+- ⚡ Optimize performance
+
+## 📄 License
+
+This project is licensed under the MIT License - देखें [LICENSE](LICENSE) file for details.
+
+**Disclaimer:** This software is for educational purposes only. Users are responsible for complying with Amazon's Terms of Service.
+
+## 🙏 Support
+
+अगर ये project helpful लगा तो:
+
+- ⭐ Star the repository
+- 🐛 Report issues
+- 🔀 Submit pull requests
+- 📢 Share with others
+
+## 📞 Contact
+
+- **Issues:** [GitHub Issues](https://github.com/yourusername/AmazonScrapperPython/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/yourusername/AmazonScrapperPython/discussions)
+- **Email:** your.email@example.com
+
+---
+
+<div align="center">
+
+Made with ❤️ for the developer community
+
+**[⬆ Back to Top](#amazon-scraper-api---multi-country-product-scraping)**
+
+</div>
