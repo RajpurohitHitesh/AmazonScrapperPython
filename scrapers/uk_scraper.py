@@ -32,7 +32,7 @@ class UKScraper(BaseAmazonScraper):
             
             product = {
                 'asin': asin,
-                'merchant': 'amazon',
+                'merchant': 'Amazon UK',
                 'name': self._extract_title(soup),
                 'category': self._extract_category(soup),
                 'subcategory': self._extract_subcategory(soup),

@@ -33,7 +33,7 @@ class IndiaScraper(BaseAmazonScraper):
             # Extract product data
             product = {
                 'asin': asin,
-                'merchant': 'amazon',
+                'merchant': 'Amazon India',
                 'name': self._extract_title(soup),
                 'category': self._extract_category(soup),
                 'subcategory': self._extract_subcategory(soup),

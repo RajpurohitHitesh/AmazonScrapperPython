@@ -32,7 +32,7 @@ class USAScraper(BaseAmazonScraper):
             
             product = {
                 'asin': asin,
-                'merchant': 'amazon',
+                'merchant': 'Amazon USA',
                 'name': self._extract_title(soup),
                 'category': self._extract_category(soup),
                 'subcategory': self._extract_subcategory(soup),

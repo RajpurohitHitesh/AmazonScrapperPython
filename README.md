@@ -194,7 +194,7 @@ print(response.json())
   "success": true,
   "data": {
     "asin": "B0FMDNZ61S",
-    "merchant": "Amazon",
+    "merchant": "Amazon India",
     "name": "Product Name",
     "category": "Electronics",
     "subcategory": "Smartphones",
@@ -230,7 +230,7 @@ API returns 12 essential fields:
 | Field | Type | Description |
 |-------|------|-------------|
 | `asin` | string | Amazon Standard Identification Number |
-| `merchant` | string | Seller name (Amazon, Cloudtail, etc.) |
+| `merchant` | string | Country-specific Amazon (e.g., Amazon India, Amazon USA) |
 | `name` | string | Product title |
 | `category` | string | Main category |
 | `subcategory` | string | Subcategory |
@@ -302,7 +302,7 @@ API returns 12 essential fields:
 | Field | Type | Description |
 |-------|------|-------------|
 | `asin` | string | Amazon Standard Identification Number |
-| `merchant` | string | Seller name (Amazon, Cloudtail, etc.) |
+| `merchant` | string | Country-specific Amazon (e.g., Amazon India, Amazon USA) |
 | `name` | string | Product title |
 | `category` | string | Main category |
 | `subcategory` | string | Subcategory |
