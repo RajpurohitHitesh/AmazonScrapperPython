@@ -1,29 +1,29 @@
 # Contributing to Amazon Scraper API
 
-आपका योगदान स्वागत है! 🎉
+Welcome! Your contributions are appreciated! 🎉
 
 ## How to Contribute
 
 ### Reporting Bugs
 
-अगर आपको कोई bug मिलता है:
+If you find a bug:
 
-1. [GitHub Issues](https://github.com/yourusername/AmazonScrapperPython/issues) पर check करें कि वो bug पहले report हुआ है या नहीं
-2. अगर नहीं, तो नया issue create करें:
-   - Clear title दें
-   - Steps to reproduce बताएं
-   - Expected vs actual behavior explain करें
-   - Screenshots attach करें (अगर possible हो)
-   - Environment details दें (Python version, OS, etc.)
+1. Check [GitHub Issues](https://github.com/yourusername/AmazonScrapperPython/issues) to see if the bug has already been reported
+2. If not, create a new issue:
+   - Provide a clear title
+   - Describe steps to reproduce
+   - Explain expected vs actual behavior
+   - Attach screenshots if possible
+   - Include environment details (Python version, OS, etc.)
 
 ### Suggesting Features
 
-नई features suggest करने के लिए:
+To suggest new features:
 
-1. Issue create करें with tag `enhancement`
-2. Feature को detail में explain करें
-3. Use case बताएं कि ये feature क्यों useful होगा
-4. Implementation के ideas share करें (optional)
+1. Create an issue with tag `enhancement`
+2. Explain the feature in detail
+3. Describe the use case and why it would be useful
+4. Share implementation ideas (optional)
 
 ### Pull Requests
 
@@ -39,14 +39,14 @@
    ```
 
 3. **Make your changes**
-   - Code clean और readable रखें
-   - Comments add करें जहां जरूरी हो
-   - Existing code style follow करें
+   - Keep code clean and readable
+   - Add comments where necessary
+   - Follow existing code style
 
 4. **Test your changes**
    ```bash
    python api_server.py
-   # API test करें
+   # Test the API
    ```
 
 5. **Commit your changes**
@@ -61,22 +61,22 @@
    ```
 
 7. **Create Pull Request**
-   - GitHub पर अपनी fork में जाएं
-   - "New Pull Request" button click करें
-   - Clear description लिखें कि आपने क्या changes किए हैं
+   - Go to your fork on GitHub
+   - Click "New Pull Request" button
+   - Write a clear description of your changes
 
 ## Development Guidelines
 
 ### Code Style
 
-- Python PEP 8 guidelines follow करें
-- Variable names descriptive रखें
-- Functions को properly document करें
-- Error handling implement करें
+- Follow Python PEP 8 guidelines
+- Use descriptive variable names
+- Document functions properly
+- Implement error handling
 
 ### Adding New Country Scraper
 
-नया country scraper add करने के लिए:
+To add a new country scraper:
 
 1. **Create scraper file:**
    ```python
@@ -102,36 +102,36 @@
    ```
 
 3. **Test thoroughly:**
-   - Multiple products test करें
-   - Different categories check करें
-   - Edge cases handle करें
+   - Test with multiple products
+   - Check different categories
+   - Handle edge cases
 
 ### Testing
 
-Changes commit करने से पहले:
+Before committing changes:
 
-- API को locally run करें
-- सभी endpoints test करें
-- Error cases verify करें
-- Different products के साथ test करें
+- Run the API locally
+- Test all endpoints
+- Verify error cases
+- Test with different products
 
 ## Questions?
 
-अगर कोई सवाल हो तो:
+If you have questions:
 
-- [GitHub Discussions](https://github.com/yourusername/AmazonScrapperPython/discussions) में पूछें
-- Issue create करें
-- Email करें: your.email@example.com
+- Ask in [GitHub Discussions](https://github.com/yourusername/AmazonScrapperPython/discussions)
+- Create an issue
+- Email: your.email@example.com
 
 ## Code of Conduct
 
-- Respectful रहें
-- Constructive feedback दें
-- दूसरों की मदद करें
-- Inclusive environment बनाए रखें
+- Be respectful
+- Give constructive feedback
+- Help others
+- Maintain an inclusive environment
 
 ## License
 
-Contributions को MIT License के under distribute किया जाएगा (same as the project).
+Contributions will be distributed under the MIT License (same as the project).
 
-धन्यवाद! 🙏
+Thank you! 🙏

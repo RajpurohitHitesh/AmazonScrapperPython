@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Selenium](https://img.shields.io/badge/Selenium-4.15-red.svg)
 
-**एक powerful REST API service जो 15+ देशों के Amazon marketplaces से product data scrape करती है**
+**A powerful REST API service for scraping product data from 15+ Amazon marketplaces worldwide**
 
 [Features](#-features) • [Installation](#-installation) • [Quick Start](QUICKSTART.md) • [Usage](#-api-usage) • [Contributing](CONTRIBUTING.md)
 
@@ -84,7 +84,7 @@ Script automatically:
 ### Method 2: Manual Installation
 
 ### Prerequisites
-- Python 3.7 या higher
+- Python 3.7 or higher
 - Microsoft Edge browser
 - Internet connection
 
@@ -110,12 +110,12 @@ copy .env.example .env
 cp .env.example .env
 ```
 
-**4. Edit `.env` और अपनी API key set करें:**
+**4. Edit `.env` and set your API key:**
 ```bash
 API_KEY=your_secure_api_key_here
 ```
 
-**💡 Tip:** Secure API key generate करने के लिए:
+**💡 Tip:** Generate a secure API key with:
 ```bash
 python -c "import secrets; print(secrets.token_urlsafe(32))"
 ```
@@ -125,9 +125,9 @@ python -c "import secrets; print(secrets.token_urlsafe(32))"
 python api_server.py
 ```
 
-Server चालू हो जाएगा: http://127.0.0.1:5000
+Server will start at: http://127.0.0.1:5000
 
-✅ **Installation complete!** अब आप API use कर सकते हैं।
+✅ **Installation complete!** You can now use the API.
 
 ## 📡 API Usage
 
@@ -461,7 +461,7 @@ sudo journalctl -u amazon-scraper-api -f
 
 ## 🤝 Contributing
 
-Contributions are welcome! देखें [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 **Ways to contribute:**
 - 🐛 Report bugs
@@ -472,13 +472,13 @@ Contributions are welcome! देखें [CONTRIBUTING.md](CONTRIBUTING.md) fo
 
 ## 📄 License
 
-This project is licensed under the MIT License - देखें [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
 **Disclaimer:** This software is for educational purposes only. Users are responsible for complying with Amazon's Terms of Service.
 
 ## 🙏 Support
 
-अगर ये project helpful लगा तो:
+If you find this project helpful:
 
 - ⭐ Star the repository
 - 🐛 Report issues

@@ -1,8 +1,8 @@
 # 🚀 Quick Start Guide - Amazon Scraper API
 
-## 5 मिनट में Setup करें!
+## Get started in 5 minutes!
 
-### Step 1: Download करें
+### Step 1: Download
 
 **Option A: Git Clone (Recommended)**
 ```bash
@@ -11,38 +11,38 @@ cd AmazonScrapperPython
 ```
 
 **Option B: ZIP Download**
-1. GitHub पर जाएं और "Code" → "Download ZIP" click करें
-2. ZIP extract करें
-3. Folder में navigate करें
+1. Go to GitHub and click "Code" → "Download ZIP"
+2. Extract the ZIP
+3. Navigate to the folder
 
 ---
 
-### Step 2: Install करें
+### Step 2: Install
 
-**Windows पर:**
+**On Windows:**
 ```bash
-# Double-click करें:
+# Double-click:
 start.bat
 
-# या Command Prompt में:
+# or in Command Prompt:
 pip install -r requirements.txt
 ```
 
-**Linux/Mac पर:**
+**On Linux/Mac:**
 ```bash
-# Terminal में:
+# In Terminal:
 chmod +x start.sh
 ./start.sh
 
-# या manually:
+# or manually:
 pip3 install -r requirements.txt
 ```
 
 ---
 
-### Step 3: Configure करें
+### Step 3: Configure
 
-**1. Environment file बनाएं:**
+**1. Create environment file:**
 ```bash
 # Windows
 copy .env.example .env
@@ -51,28 +51,28 @@ copy .env.example .env
 cp .env.example .env
 ```
 
-**2. `.env` file edit करें:**
+**2. Edit `.env` file:**
 ```bash
-# सिर्फ ये line change करें:
+# Change only this line:
 API_KEY=your_secure_api_key_here
 ```
 
-**💡 Secure API Key generate करें:**
+**💡 Generate a secure API Key:**
 ```bash
 python -c "import secrets; print(secrets.token_urlsafe(32))"
 ```
 
-Output को copy करके `.env` में paste कर दें।
+Copy the output and paste it in `.env`.
 
 ---
 
-### Step 4: Run करें
+### Step 4: Run
 
 ```bash
 python api_server.py
 ```
 
-**Output दिखेगा:**
+**You'll see:**
 ```
 ============================================================
 🚀 AmazonScraper API Server
@@ -84,27 +84,27 @@ python api_server.py
 ============================================================
 ```
 
-✅ **Server चालू है!** http://127.0.0.1:5000
+✅ **Server is running!** http://127.0.0.1:5000
 
 ---
 
-### Step 5: Test करें
+### Step 5: Test
 
-**Option 1: Browser से**
+**Option 1: Browser**
 ```
 http://127.0.0.1:5000/health
 ```
 
-**Option 2: cURL से**
+**Option 2: cURL**
 ```bash
 curl http://127.0.0.1:5000/health
 ```
 
-**Option 3: Python से**
+**Option 3: Python**
 ```python
 import requests
 
-# Product scrape करें
+# Scrape a product
 url = "http://127.0.0.1:5000/api/scrape"
 headers = {"X-API-Key": "your_api_key_here"}
 data = {"product_url": "https://www.amazon.in/dp/B0FMDNZ61S"}
@@ -136,7 +136,7 @@ curl http://127.0.0.1:5000/health
 
 ### View Logs
 ```bash
-# Log file देखें
+# View log file
 cat api.log           # Linux/Mac
 type api.log          # Windows
 ```
@@ -177,45 +177,45 @@ curl http://127.0.0.1:5000/api/countries
 
 ### Error: "Module not found"
 ```bash
-# Dependencies फिर से install करें
+# Reinstall dependencies
 pip install -r requirements.txt --force-reinstall
 ```
 
 ### Error: "Port already in use"
 ```bash
-# .env में port change करें
+# Change port in .env
 API_PORT=5001
 ```
 
 ### Error: "Invalid API Key"
 ```bash
-# .env में API_KEY check करें
-# और request में same key use करें
+# Check API_KEY in .env
+# and use the same key in requests
 ```
 
 ### Browser/WebDriver Issues
 ```bash
-# Internet connection check करें
-# First run पर WebDriver auto-download होगा
+# Check internet connection
+# WebDriver will auto-download on first run
 ```
 
 ---
 
 ## 🎯 Next Steps
 
-1. ✅ [Full Documentation](README.md) पढ़ें
-2. ✅ [VPS Deployment Guide](INSTALL.txt) देखें
-3. ✅ [Contributing Guidelines](CONTRIBUTING.md) देखें
-4. ✅ अपनी application में integrate करें
+1. ✅ Read the [Full Documentation](README.md)
+2. ✅ See the [VPS Deployment Guide](INSTALL.txt)
+3. ✅ Check [Contributing Guidelines](CONTRIBUTING.md)
+4. ✅ Integrate into your application
 
 ---
 
 ## 💡 Pro Tips
 
-- **Development:** `DEBUG_MODE=True` रखें `.env` में
-- **Production:** `DEBUG_MODE=False` करें और proper API key use करें
-- **Logs:** Regular logs check करें issues देखने के लिए
-- **Updates:** Repository regularly pull करें नए features के लिए
+- **Development:** Keep `DEBUG_MODE=True` in `.env`
+- **Production:** Set `DEBUG_MODE=False` and use a strong API key
+- **Logs:** Regularly check logs to monitor issues
+- **Updates:** Pull the repository regularly for new features
 
 ---
 

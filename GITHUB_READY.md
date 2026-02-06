@@ -1,22 +1,22 @@
 # 🎉 GitHub Installation Guide
 
-## आपका Amazon Scraper अब GitHub-ready है!
+## Your Amazon Scraper is now GitHub-ready!
 
-यहाँ पर **सभी changes** की list है जो आपके project को GitHub पर डालने के लिए ready बनाती है:
+Here's a list of **all changes** that make your project ready for GitHub:
 
 ---
 
-## ✅ नई Files Added
+## ✅ New Files Added
 
 ### 1. `.gitignore` 
-- Python cache files ignore करता है
-- Environment variables को secure रखता है
-- Logs और temporary files ignore करता है
+- Ignores Python cache files
+- Secures environment variables
+- Ignores logs and temporary files
 
 ### 2. `.env.example`
-- Template file users के लिए
-- Sensitive data बिना actual values के
-- Easy configuration के लिए
+- Template file for users
+- Sensitive data without actual values
+- Easy configuration
 
 ### 3. `LICENSE`
 - MIT License
@@ -24,40 +24,39 @@
 - Legal protection
 
 ### 4. `CONTRIBUTING.md`
-- Hindi + English contribution guide
+- Contribution guide
 - Bug reporting process
 - Pull request guidelines
 - Development workflow
 
 ### 5. `setup.py`
 - Python package installation
-- Dependencies auto-install
+- Auto-install dependencies
 - Console script entry point
 - `pip install -e .` support
 
 ### 6. `MANIFEST.in`
 - Package distribution files
-- Include करने वाली files की list
-- Clean distribution के लिए
+- List of files to include
+- Clean distribution
 
 ### 7. `start.bat` (Windows)
-- One-click setup और start
+- One-click setup and start
 - Automatic dependency installation
 - Environment file creation
 - User-friendly
 
 ### 8. `start.sh` (Linux/Mac)
 - Bash script for Unix systems
-- Same features जैसे start.bat
+- Same features as start.bat
 - Executable permissions
 
 ### 9. `QUICKSTART.md`
 - 5-minute setup guide
-- Hindi + English
 - Step-by-step instructions
 - Troubleshooting tips
 
-### 10. `GITHUB_READY.md` (ये file)
+### 10. `GITHUB_READY.md` (this file)
 - Complete summary
 - Next steps guide
 - Publishing instructions
@@ -115,54 +114,54 @@ AmazonScrapperPython/
 
 ---
 
-## 🚀 अब GitHub पर कैसे डालें?
+## 🚀 How to Publish on GitHub?
 
-### Step 1: Git Repository Initialize करें
+### Step 1: Initialize Git Repository
 
 ```bash
-# अगर already git initialized नहीं है:
+# If not already git initialized:
 git init
 
-# सभी files add करें:
+# Add all files:
 git add .
 
 # First commit:
 git commit -m "Initial commit: Amazon Scraper API with multi-country support"
 ```
 
-### Step 2: GitHub पर Repository बनाएं
+### Step 2: Create Repository on GitHub
 
-1. https://github.com पर जाएं
-2. "New Repository" click करें
-3. Repository name: `AmazonScrapperPython` या कोई और
+1. Go to https://github.com
+2. Click "New Repository"
+3. Repository name: `AmazonScrapperPython` or any other name
 4. Description: "REST API for scraping Amazon products across 15+ countries"
-5. **Public** या **Private** select करें
-6. **DON'T initialize** with README (क्योंकि आपके पास already है)
-7. "Create Repository" click करें
+5. Select **Public** or **Private**
+6. **DON'T initialize** with README (you already have one)
+7. Click "Create Repository"
 
-### Step 3: Local को GitHub से Connect करें
+### Step 3: Connect Local to GitHub
 
 ```bash
-# GitHub की repository URL add करें (Replace with your URL):
+# Add GitHub repository URL (Replace with your URL):
 git remote add origin https://github.com/YOUR_USERNAME/AmazonScrapperPython.git
 
-# Push करें:
+# Push:
 git branch -M main
 git push -u origin main
 ```
 
-### Step 4: Repository Settings Update करें
+### Step 4: Update Repository Settings
 
-GitHub पर अपनी repository में जाकर:
+On GitHub, go to your repository:
 
 1. **About section** (right sidebar):
-   - Description add करें
-   - Website URL (अगर है)
-   - Topics add करें: `amazon`, `scraper`, `api`, `flask`, `selenium`, `python`
+   - Add description
+   - Add website URL (if any)
+   - Add topics: `amazon`, `scraper`, `api`, `flask`, `selenium`, `python`
 
-2. **README को verify** करें कि properly display हो रहा है
+2. **Verify README** displays properly
 
-3. **Topics/Tags** add करें:
+3. **Add Topics/Tags**:
    ```
    amazon-scraper
    web-scraping
@@ -176,27 +175,27 @@ GitHub पर अपनी repository में जाकर:
 
 ---
 
-## 📢 Repository को Promote करें
+## 📢 Promote Your Repository
 
-### Update करने वाली चीजें (अपनी info से):
+### Things to update (with your info):
 
-1. **`README.md`** में:
+1. **In `README.md`**:
    - Line 69: `git clone https://github.com/YOUR_USERNAME/AmazonScrapperPython.git`
    - Line 484: Contact email
    - Line 485-486: GitHub links
 
-2. **`setup.py`** में:
+2. **In `setup.py`**:
    - Line 16: Author name
    - Line 17: Author email  
    - Line 21: Repository URL
    - Lines 42-44: Project URLs
 
-3. **`CONTRIBUTING.md`** में:
+3. **In `CONTRIBUTING.md`**:
    - Line 9: GitHub Issues URL
    - Line 118: GitHub Discussions URL
    - Line 120: Contact email
 
-4. **`QUICKSTART.md`** में:
+4. **In `QUICKSTART.md`**:
    - Line 9: Clone URL
    - Line 182-184: Help links
 
@@ -263,14 +262,14 @@ jobs:
 ```
 
 ### 2. GitHub Releases
-- Tags create करें versions के लिए
-- Release notes लिखें
-- Changelog maintain करें
+- Create tags for versions
+- Write release notes
+- Maintain changelog
 
 ### 3. Documentation Site
-- GitHub Pages enable करें
-- MkDocs या Sphinx use करें
-- API documentation host करें
+- Enable GitHub Pages
+- Use MkDocs or Sphinx
+- Host API documentation
 
 ### 4. Issue Templates
 ```markdown
@@ -293,41 +292,41 @@ jobs:
 ✅ **Security:** .env files properly handled  
 ✅ **Installation:** Multiple easy install methods  
 ✅ **Code Quality:** Clean structure, commented code  
-✅ **User-Friendly:** Hindi + English support  
+✅ **User-Friendly:** Professional English documentation  
 ✅ **Quick Start:** One-command setup scripts  
 ✅ **Examples:** Real-world usage examples  
 ✅ **Support:** Multiple contact channels  
 
 ---
 
-## ✨ Features Users को Milenge
+## ✨ Features Users Will Get
 
-1. ⚡ **One-command setup** - `start.bat` या `start.sh`
-2. 📖 **Clear documentation** - README + QUICKSTART
+1. ⚡ **One-command setup** - `start.bat` or `start.sh`
+2. 📚 **Clear documentation** - README + QUICKSTART
 3. 🔧 **Easy configuration** - `.env.example` template
 4. 🐛 **Bug reporting** - GitHub Issues
 5. 🤝 **Contributing** - Clear guidelines
 6. 📦 **Package install** - `pip install -e .`
-7. 🌍 **Multi-language** - Hindi + English
+7. 🌍 **Professional** - English documentation
 8. 🔐 **Secure** - No secrets in repo
 
 ---
 
 ## 🎉 Congratulations!
 
-आपका **Amazon Scraper API** अब:
+Your **Amazon Scraper API** is now:
 
-✅ **GitHub-ready** है  
-✅ **Production-ready** है  
-✅ **User-friendly** है  
-✅ **Well-documented** है  
-✅ **Easy to install** है  
-✅ **Community-friendly** है  
+✅ **GitHub-ready**  
+✅ **Production-ready**  
+✅ **User-friendly**  
+✅ **Well-documented**  
+✅ **Easy to install**  
+✅ **Community-friendly**  
 
-बस GitHub पर push करें और दुनिया के साथ share करें! 🚀
+Just push to GitHub and share with the world! 🚀
 
 ---
 
-**Questions?** Open an issue या README में contact करें.
+**Questions?** Open an issue or contact via README.
 
 **Happy Coding!** 💻✨
