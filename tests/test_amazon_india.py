@@ -1,7 +1,7 @@
 """
 Test script for Amazon India scraper
-Run with: python -m pytest tests/test_india.py -v
-Or directly: python tests/test_india.py
+Run with: python -m pytest tests/test_amazon_india.py -v
+Or directly: python tests/test_amazon_india.py
 """
 import sys
 import json
