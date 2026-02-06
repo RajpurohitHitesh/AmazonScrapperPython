@@ -92,7 +92,7 @@ Script automatically:
 
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/AmazonScrapperPython.git
+git clone https://github.com/RajpurohitHitesh/AmazonScrapperPython.git
 cd AmazonScrapperPython
 ```
 
@@ -487,8 +487,8 @@ If you find this project helpful:
 
 ## 📞 Contact
 
-- **Issues:** [GitHub Issues](https://github.com/yourusername/AmazonScrapperPython/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yourusername/AmazonScrapperPython/discussions)
+- **Issues:** [GitHub Issues](https://github.com/RajpurohitHitesh/AmazonScrapperPython/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/RajpurohitHitesh/AmazonScrapperPython/discussions)
 - **Email:** your.email@example.com
 
 ---

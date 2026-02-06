@@ -19,7 +19,7 @@ setup(
     description="REST API service for scraping Amazon product data across 15+ countries",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/AmazonScrapperPython",
+    url="https://github.com/RajpurohitHitesh/AmazonScrapperPython",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -43,8 +43,8 @@ setup(
     include_package_data=True,
     keywords="amazon scraper api flask selenium web-scraping ecommerce",
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/AmazonScrapperPython/issues",
-        "Source": "https://github.com/yourusername/AmazonScrapperPython",
-        "Documentation": "https://github.com/yourusername/AmazonScrapperPython#readme",
+        "Bug Reports": "https://github.com/RajpurohitHitesh/AmazonScrapperPython/issues",
+        "Source": "https://github.com/RajpurohitHitesh/AmazonScrapperPython",
+        "Documentation": "https://github.com/RajpurohitHitesh/AmazonScrapperPython#readme",
     },
 )

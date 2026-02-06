@@ -6,7 +6,7 @@
 
 **Option A: Git Clone (Recommended)**
 ```bash
-git clone https://github.com/yourusername/AmazonScrapperPython.git
+git clone https://github.com/RajpurohitHitesh/AmazonScrapperPython.git
 cd AmazonScrapperPython
 ```
 
@@ -222,8 +222,8 @@ API_PORT=5001
 ## 📞 Need Help?
 
 - 📖 [Full Documentation](README.md)
-- 🐛 [Report Issues](https://github.com/yourusername/AmazonScrapperPython/issues)
-- 💬 [Discussions](https://github.com/yourusername/AmazonScrapperPython/discussions)
+- 🐛 [Report Issues](https://github.com/RajpurohitHitesh/AmazonScrapperPython/issues)
+- 💬 [Discussions](https://github.com/RajpurohitHitesh/AmazonScrapperPython/discussions)
 
 ---
 

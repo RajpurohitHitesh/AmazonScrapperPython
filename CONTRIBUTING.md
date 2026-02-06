@@ -8,7 +8,7 @@ Welcome! Your contributions are appreciated! 🎉
 
 If you find a bug:
 
-1. Check [GitHub Issues](https://github.com/yourusername/AmazonScrapperPython/issues) to see if the bug has already been reported
+1. Check [GitHub Issues](https://github.com/RajpurohitHitesh/AmazonScrapperPython/issues) to see if the bug has already been reported
 2. If not, create a new issue:
    - Provide a clear title
    - Describe steps to reproduce
@@ -29,7 +29,7 @@ To suggest new features:
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/yourusername/AmazonScrapperPython.git
+   git clone https://github.com/RajpurohitHitesh/AmazonScrapperPython.git
    cd AmazonScrapperPython
    ```
 
@@ -119,7 +119,7 @@ Before committing changes:
 
 If you have questions:
 
-- Ask in [GitHub Discussions](https://github.com/yourusername/AmazonScrapperPython/discussions)
+- Ask in [GitHub Discussions](https://github.com/RajpurohitHitesh/AmazonScrapperPython/discussions)
 - Create an issue
 - Email: your.email@example.com
 
